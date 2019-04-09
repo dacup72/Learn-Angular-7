@@ -15,13 +15,7 @@ export class ButtonComponent implements OnInit {
   }
 
   togglePassword() {
-    var len = this.clicks.length;
     this.displayPassword = !this.displayPassword;
-    this.clicks.push(len ? this.clicks[len - 1] + 1 : 1);
+    this.clicks.push(new Date());
   }
-
-  getColor(click) {
-    return click > 4 ? 'blue' : 'white';
-  }
-
 }
