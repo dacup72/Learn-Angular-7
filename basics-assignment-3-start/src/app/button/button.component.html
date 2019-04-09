@@ -1,0 +1,16 @@
+<button
+  (click)="togglePassword()"
+>Display Details</button>
+
+<p 
+  *ngIf="displayPassword"
+>Secret password = "TUNA"</p>
+<br/>
+<p>Times Clicked: </p>
+<ul>
+  <li 
+    *ngFor="let click of clicks"
+    [ngStyle]="{'backgroundColor': getColor(click)}"
+    [ngClass]="{'clickText': click > 4}"
+  >{{ click }}</li>
+</ul>
