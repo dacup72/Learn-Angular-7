@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  loadedOption = "recipies";
+
+  onNavigate(option: string) {
+    this.loadedOption = option;
+  }
 }
