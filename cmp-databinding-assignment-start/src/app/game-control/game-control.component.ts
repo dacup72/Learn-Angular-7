@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-game-control',
@@ -6,22 +6,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game-control.component.css']
 })
 export class GameControlComponent implements OnInit {
-  ticking = false;
+  ticks = 1;
+  ticker;
+  tickerRunning = false;
+
+  @Output() sendTicks = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  toggleTicker(action) {
-    this.ticking = action;
-  }
-
-  gameTicker() {
-    if(this.ticking) {
-      setInterval(function() {
-        console.log(true);
+  onToggleTicker(action: boolean) {
+    if(action && !this.tickerRunning) {
+      this.tickerRunning = true;
+      this.ticker = window.setInterval(() => {
+        this.sendTicks.emit(this.ticks++);
       }, 1000);
+    }
+    else if(!action && this.tickerRunning) {
+      window.clearInterval(this.ticker);
+      this.tickerRunning = false;
     }
   }
 
